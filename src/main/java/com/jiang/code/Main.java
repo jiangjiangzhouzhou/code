@@ -13,7 +13,7 @@ public class Main {
         Format vidFormat = new Format("VID", vidBundles, vidPrices);
         Order newOrder = new Order();
         Calculator newCalculator = new Calculator();
-        newOrder.getOrder();
+        newOrder.getOrder(imgFormat.getFormatCode(), audFormat.getFormatCode(), vidFormat.getFormatCode());
         int[] imgResult = newCalculator.calculate(newOrder.getImgNumber(), imgFormat.getBundles());
         int[] audResult = newCalculator.calculate(newOrder.getAudioNumber(), audFormat.getBundles());
         int[] vidResult = newCalculator.calculate(newOrder.getVideoNumber(), vidFormat.getBundles());
