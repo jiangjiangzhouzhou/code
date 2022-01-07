@@ -9,7 +9,6 @@ build/
 !/src/test/**/CalculatorTest.java
 !/src/test/**/Post.java
 !/src/test/**/OrderTest.java
-/src/main/**/Format.java
 
 ### STS ###
 .apt_generated
