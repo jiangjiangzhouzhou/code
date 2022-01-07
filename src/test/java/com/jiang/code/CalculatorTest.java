@@ -12,12 +12,6 @@ class CalculatorTest {
     double[] imgPrices = {450, 800};
     Format imgFormat = new Format("IMG", imgBundles, imgPrices);
 
-    @Test
-    void testExceptionIsThrown() {
-        Calculator tester = new Calculator();
-        assertThrows(IllegalArgumentException.class, () -> tester.calculate(-10, imgFormat.getBundles()));
-    }
-
     //test calculate function
     @Test
     void testCalculate() {

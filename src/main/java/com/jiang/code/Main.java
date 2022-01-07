@@ -8,17 +8,21 @@ public class Main {
         double[] audPrices = {427.5, 810, 1147.50};
         int[] vidBundles = {3, 5, 9};
         double[] vidPrices = {570, 900, 1530};
-        Format imgFormat = new Format("IMG", imgBundles, imgPrices);
-        Format audFormat = new Format("Flac", audBundles, audPrices);
-        Format vidFormat = new Format("VID", vidBundles, vidPrices);
+
+        Post img = new Post("Image", "IMG", imgBundles, imgPrices);
+        Post aud = new Post("Audio", "Flac", audBundles, audPrices);
+        Post vid = new Post("Video", "VID", vidBundles, vidPrices);
         Order newOrder = new Order();
+        newOrder.getOrders();
         Calculator newCalculator = new Calculator();
-        newOrder.getOrder(imgFormat.getFormatCode(), audFormat.getFormatCode(), vidFormat.getFormatCode());
-        int[] imgResult = newCalculator.calculate(newOrder.getImgNumber(), imgFormat.getBundles());
-        int[] audResult = newCalculator.calculate(newOrder.getAudioNumber(), audFormat.getBundles());
-        int[] vidResult = newCalculator.calculate(newOrder.getVideoNumber(), vidFormat.getBundles());
-        newCalculator.printResult(imgFormat.getPrices(), imgResult, newOrder.getImgNumber(), imgFormat.getFormatCode(), imgFormat.getBundles());
-        newCalculator.printResult(audFormat.getPrices(), audResult, newOrder.getAudioNumber(), audFormat.getFormatCode(), audFormat.getBundles());
-        newCalculator.printResult(vidFormat.getPrices(), vidResult, newOrder.getVideoNumber(), vidFormat.getFormatCode(), vidFormat.getBundles());
+        int imgNumber = newOrder.getMediaNumber(img.getFormatCode());
+        int audNumber = newOrder.getMediaNumber(aud.getFormatCode());
+        int vidNumber = newOrder.getMediaNumber(vid.getFormatCode());
+        int[] imgResult = newCalculator.calculate(imgNumber, img.getBundles());
+        int[] audResult = newCalculator.calculate(audNumber, aud.getBundles());
+        int[] vidResult = newCalculator.calculate(vidNumber, vid.getBundles());
+        newOrder.printResult(img.getPrices(), imgResult, imgNumber, img.getFormatCode(), img.getBundles());
+        newOrder.printResult(aud.getPrices(), audResult, audNumber, aud.getFormatCode(), aud.getBundles());
+        newOrder.printResult(vid.getPrices(), vidResult, vidNumber, vid.getFormatCode(), vid.getBundles());
     }
 }

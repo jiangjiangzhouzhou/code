@@ -4,10 +4,11 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-!/src/main/**/Format.java
 !/src/main/**/Main.java
 !/src/main/**/Order.java
 !/src/tets/**/CalculatorTest.java
+!/src/tets/**/Post.java
+!/src/tets/**/OrderTest.java
 
 ### STS ###
 .apt_generated

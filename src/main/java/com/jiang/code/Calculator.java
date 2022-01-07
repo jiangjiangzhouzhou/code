@@ -1,18 +1,10 @@
 package com.jiang.code;
 
-import lombok.extern.java.Log;
-
-import java.util.Scanner;
-
-@Log
 public class Calculator {
 
     //calculate bundle breakdown for each submission format based on the order
     public int[] calculate(int amount, int[] formats) {
         int[] bundleNumbers = new int[formats.length];
-        if (amount <= 0) {
-            throw new IllegalArgumentException("The number of items must be bigger than 0");
-        }
         int previousNumber = 0;
         int currentNumber;
         int smallBundle = amount / formats[formats.length - 1] + 1;
@@ -47,19 +39,5 @@ public class Calculator {
             }
         }
         return bundleNumbers;
-    }
-
-    //Print out the result using log of lombok
-    public void printResult(double[] prices, int[] bundles, int number, String label, int[] format) {
-        double cost = 0;
-        for (int i = 0; i < prices.length; i++) {
-            cost = prices[i] * bundles[i] + cost;
-        }
-        log.info(number + " " + label + " $" + cost);
-        for (int f = 0; f < format.length; f++) {
-            if (bundles[f] != 0) {
-                log.info(bundles[f] + " * " + format[f] + " $" + prices[f] * bundles[f]);
-            }
-        }
     }
 }
