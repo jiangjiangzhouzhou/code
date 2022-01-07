@@ -1,6 +1,7 @@
 package com.jiang.code;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +22,7 @@ public class Main {
         posts.add(img);
         posts.add(aud);
         posts.add(vid);
-        for(Post p: posts){
+        for (Post p : posts) {
             int number = newOrder.getMediaNumber(p.getFormatCode());
             int[] result = newCalculator.calculate(number, p.getBundles());
             newOrder.printResult(p, result, number);

@@ -38,10 +38,9 @@ public class Order {
     public int getMediaNumber(String code) {
         String order;
         int number = -1;
-        if (orders.isEmpty()){
+        if (orders.isEmpty()) {
             throw new IllegalArgumentException("There is no order");
-        }
-        else {
+        } else {
             for (String s : orders) {
                 order = s;
                 if (order.contains(code)) {
@@ -49,8 +48,8 @@ public class Order {
                 }
             }
         }
-        if (number < 0){
-            throw new IllegalArgumentException("There is no order for $code type");
+        if (number < 0) {
+            throw new IllegalArgumentException("There is no order for" + code + "type");
         }
         return number;
     }
