@@ -10,7 +10,7 @@ class CalculatorTest {
     int[] testResult = {1, 1};
     int[] imgBundles = {5, 10};
     double[] imgPrices = {450, 800};
-    Format imgFormat = new Format("IMG", imgBundles, imgPrices);
+    Post imgFormat = new Post("IMG", imgBundles, imgPrices);
 
     //test calculate function
     @Test

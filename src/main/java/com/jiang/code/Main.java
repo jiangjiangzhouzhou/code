@@ -1,5 +1,7 @@
 package com.jiang.code;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
         int[] imgBundles = {5, 10};
@@ -9,20 +11,20 @@ public class Main {
         int[] vidBundles = {3, 5, 9};
         double[] vidPrices = {570, 900, 1530};
 
-        Post img = new Post("Image", "IMG", imgBundles, imgPrices);
-        Post aud = new Post("Audio", "Flac", audBundles, audPrices);
-        Post vid = new Post("Video", "VID", vidBundles, vidPrices);
+        Post img = new Post("IMG", imgBundles, imgPrices);
+        Post aud = new Post("Flac", audBundles, audPrices);
+        Post vid = new Post("VID", vidBundles, vidPrices);
         Order newOrder = new Order();
         newOrder.getOrders();
         Calculator newCalculator = new Calculator();
-        int imgNumber = newOrder.getMediaNumber(img.getFormatCode());
-        int audNumber = newOrder.getMediaNumber(aud.getFormatCode());
-        int vidNumber = newOrder.getMediaNumber(vid.getFormatCode());
-        int[] imgResult = newCalculator.calculate(imgNumber, img.getBundles());
-        int[] audResult = newCalculator.calculate(audNumber, aud.getBundles());
-        int[] vidResult = newCalculator.calculate(vidNumber, vid.getBundles());
-        newOrder.printResult(img.getPrices(), imgResult, imgNumber, img.getFormatCode(), img.getBundles());
-        newOrder.printResult(aud.getPrices(), audResult, audNumber, aud.getFormatCode(), aud.getBundles());
-        newOrder.printResult(vid.getPrices(), vidResult, vidNumber, vid.getFormatCode(), vid.getBundles());
+        ArrayList<Post> posts = new ArrayList<>();
+        posts.add(img);
+        posts.add(aud);
+        posts.add(vid);
+        for(Post p: posts){
+            int number = newOrder.getMediaNumber(p.getFormatCode());
+            int[] result = newCalculator.calculate(number, p.getBundles());
+            newOrder.printResult(p, result, number);
+        }
     }
 }

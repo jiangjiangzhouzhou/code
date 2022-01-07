@@ -6,13 +6,11 @@ import lombok.Setter;
 @Getter
 
 public class Post {
-    private String submissionFormat;
     private String formatCode;
     private int[] bundles;
     private double[] prices;
 
-    public Post(String format, String code, int[] bundle, double[] price) {
-        submissionFormat = format;
+    public Post(String code, int[] bundle, double[] price) {
         formatCode = code;
         bundles = bundle;
         prices = price;
