@@ -25,7 +25,7 @@ public class Main {
         for (Post p : posts) {
             int number = newOrder.getMediaNumber(p.getFormatCode());
             int[] result = newCalculator.calculate(number, p.getBundles());
-            newOrder.printResult(p, result, number);
+            p.printPost(result, number);
         }
     }
 }

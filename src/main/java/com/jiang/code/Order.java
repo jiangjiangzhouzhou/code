@@ -53,18 +53,4 @@ public class Order {
         }
         return number;
     }
-
-    //Print out the result using log of lombok
-    public void printResult(Post post, int[] bundles, int number) {
-        double cost = 0;
-        for (int i = 0; i < post.getPrices().length; i++) {
-            cost = post.getPrices()[i] * bundles[i] + cost;
-        }
-        log.info(number + " " + post.getFormatCode() + " $" + cost);
-        for (int f = 0; f < post.getBundles().length; f++) {
-            if (bundles[f] != 0) {
-                log.info(bundles[f] + " * " + post.getBundles()[f] + " $" + post.getPrices()[f] * bundles[f]);
-            }
-        }
-    }
 }
