@@ -1,43 +1,61 @@
 package com.jiang.code;
 
-public class Calculator {
+import lombok.Getter;
+import lombok.Setter;
 
-    //calculate bundle breakdown for each submission format based on the order
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
+
+public class Calculator {
+    private int previousNumber = 0;
+    private int currentNumber;
+    private int count = 0;
+    private int origin = 0;
+    private int[] format;
+    private int[] temResult;// store the temporary result
+    @Setter
+    @Getter
+    private int[] result;//The result of the calculation
+
     public int[] calculate(int amount, int[] formats) {
         int[] bundleNumbers = new int[formats.length];
-        int previousNumber = 0;
-        int currentNumber;
+        int[] bundleNumber = new int[formats.length];
+        Arrays.fill(bundleNumbers, 0);
+        Arrays.fill(bundleNumber, 0);
+        result = bundleNumber;
+        temResult = bundleNumbers;
+        count = formats.length - 1;
+        format = formats;
+        origin = amount;
+        previousNumber = 0;//initialize after last calculation
+        currentNumber = 0;//initialize after last calculation
         int smallBundle = amount / formats[formats.length - 1] + 1;
         int bigBundle = amount / formats[0] + 1;
         if (amount % formats[formats.length - 1] == 0) {
-            for (int i = 0; i < formats.length - 1; i++) {
-                bundleNumbers[i] = 0;
-            }
-            bundleNumbers[formats.length - 1] = amount / formats[formats.length - 1];
-        } else {
-            for (int i = smallBundle; i <= bigBundle; i++) {
-                for (int a = 0; a <= i; a++) {
-                    if (formats.length == 3) {
-                        for (int b = 0; b <= i - a; b++) {
-                            currentNumber = a * formats[0] + b * formats[1] + (i - a - b) * formats[2];
-                            if (previousNumber == 0 || (currentNumber >= amount && currentNumber < previousNumber)) {
-                                previousNumber = currentNumber;
-                                bundleNumbers[0] = a;
-                                bundleNumbers[1] = b;
-                                bundleNumbers[2] = i - a - b;
-                            }
-                        }
-                    } else {
-                        currentNumber = a * formats[0] + (i - a) * formats[1];
-                        if (previousNumber == 0 || (currentNumber >= amount && currentNumber < previousNumber)) {
-                            previousNumber = currentNumber;
-                            bundleNumbers[0] = a;
-                            bundleNumbers[1] = i - a;
-                        }
-                    }
-                }
-            }
+            result[formats.length - 1] = amount / formats[formats.length - 1];
+            return result;
         }
-        return bundleNumbers;
+        if (amount != 0) {
+            IntStream.range(smallBundle, bigBundle + 1).forEach(i -> getLoop(i, 0, 0));
+        }
+        return result;
+    }
+
+    public void getLoop(int maxNumber, int bundle, int p) {
+        if (p < count) {
+            IntStream.range(0, maxNumber + 1).forEach(i -> {
+                temResult[p] = i;
+                int countBundle = i * format[p] + bundle;
+                int pos = p + 1;
+                getLoop(maxNumber - i, countBundle, pos);
+            });
+        }
+        currentNumber = bundle + maxNumber * format[p];
+        temResult[p] = maxNumber;
+        if ((previousNumber == 0 && currentNumber >= origin) || (currentNumber >= origin && currentNumber < previousNumber)) {
+            previousNumber = currentNumber;
+            IntStream.range(0, temResult.length).forEach(i -> result[i] = temResult[i]);
+        }
     }
 }

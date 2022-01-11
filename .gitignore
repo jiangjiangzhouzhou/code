@@ -6,9 +6,13 @@ build/
 !**/src/test/**/build/
 !/src/main/**/Main.java
 !/src/main/**/Order.java
-!/src/test/**/CalculatorTest.java
 !/src/test/**/Post.java
-!/src/test/**/OrderTest.java
+!/src/test/**/Receiver.java
+!/src/test/**/Analyser.java
+!/src/test/**/Printer.java
+!/src/test/**/CalculatorTest.java
+!/src/test/**/AnalyserTest.java
+!/src/test/**/ReceiverTest.java
 
 ### STS ###
 .apt_generated
